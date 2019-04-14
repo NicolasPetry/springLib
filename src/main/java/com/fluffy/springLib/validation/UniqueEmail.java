@@ -8,21 +8,24 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
-import javax.validation.Payload;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Constraint(validatedBy= {})
-@NotBlank(message="{blankField}")
-@Size(min=6, max=100, message="{sizeError}")
+import com.fluffy.springLib.validation.UniqueEmailValidator;
+
+@Constraint(validatedBy=UniqueEmailValidator.class)
+@NotBlank(message="{blankEmail}")
+@Email
+@Size(min=4, max=250, message="{emailSizeError}")
 @Documented
 @Retention(RUNTIME)
-@Target({FIELD})
-public @interface Password {
+@Target(FIELD)
+public @interface UniqueEmail {
 
-	String message() default "{noMatch}";
+	String message() default "{duplicateEmail}";
 	
 	Class[] groups() default {};
 	
-	Class<? extends Payload>[] payload() default {};
+	Class[] payload() default {};
 }

@@ -18,7 +18,7 @@
 <body>
 <div class="container">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Greetings</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -31,13 +31,23 @@
         <a class="nav-link" href="/signup">Sign Up</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Log In</a>
+        <a class="nav-link" href="/login">Log In</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link" href="/speciality" tabindex="-1">Speciality</a>
       </li>
+      <form:form id="logoutForm" action="/logout" class="form-inline">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="document.getElementById('logoutForm').submit()">Log out</button>
+      </form:form>
     </ul>
   </div>
 </nav>
-</body>
-</html>
+
+<c:if test="${not empty flashMessage }">
+	<div class="alert alert-${flashKind }" role="alert">
+	${flashMessage }
+	<button type="button" class="close" data-dismiss="alert" aria-tabel="Close">
+	<span aria-hidden="ture">&times;</span>
+	</button>
+	</div>
+</c:if>

@@ -3,7 +3,9 @@ package com.fluffy.springLib.commands;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fluffy.springLib.domains.User;
 import com.fluffy.springLib.validation.Password;
+import com.fluffy.springLib.validation.UniqueEmail;
 
 
 public class UserCommand {
@@ -16,26 +18,18 @@ public class UserCommand {
 	@Size(min=2, max=50, message="{sizeError}")
 	private String surname;
 	
-	@NotBlank(message="{blankField}")
-	@Size(min=2, max=100, message="{sizeError}")
 	private String address;
 	
-	@NotBlank(message="{blankField}")
-	@Size(min=2, max=10, message="{sizeError}")
 	private String zipCode;
 	
-	@NotBlank(message="{blankField}")
-	@Size(min=2, max=100, message="{sizeError}")
 	private String town;
 	
-	@NotBlank(message="{blankEmail}")
-	@Size(min=6, max=100, message="{emailSizeError}")
+	@UniqueEmail
 	private String email;
 	
 	@Password
 	private String password;
 	
-	@NotBlank(message="{blankField}")
 	private String password2;
 
 	public String getFirstName() {
@@ -102,5 +96,19 @@ public class UserCommand {
 		this.password2 = password2;
 	}
 	
-	
+	public User toUser() {
+		
+		User user = new User();
+		
+		user.setFirstName(firstName);
+		user.setSurname(surname);
+		user.setAddress(address);
+		user.setZipCode(zipCode);
+		user.setTown(town);
+		user.setEmail(email);
+		user.setPassword(password);
+		
+		return user;
+		
+	}
 }
